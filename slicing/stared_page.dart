@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'database_helper.dart';
 
 class StarredPage extends StatefulWidget {
   const StarredPage({Key? key}) : super(key: key);
@@ -9,25 +8,12 @@ class StarredPage extends StatefulWidget {
 }
 
 class _StarredPageState extends State<StarredPage> {
-  final DatabaseHelper _dbHelper = DatabaseHelper();
   List<String> lists = [];
 
-  @override
-  void initState() {
-    super.initState();
-    _loadLists();
-  }
-
-  Future<void> _loadLists() async {
-    final data = await _dbHelper.getLists();
+  void _addList(String name) {
     setState(() {
-      lists = data;
+      lists.add(name);
     });
-  }
-
-  Future<void> _addList(String name) async {
-    await _dbHelper.addList(name);
-    _loadLists();
   }
 
   void _showAddListDialog() {
